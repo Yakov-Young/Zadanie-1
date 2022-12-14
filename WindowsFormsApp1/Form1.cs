@@ -46,6 +46,7 @@ namespace WindowsFormsApp1
             dataGridView.ColumnCount = 5;
             dataGridView.RowCount = 6;
             dataGridView.AllowUserToAddRows = false;
+            textBox1.Enabled = false;
 
             Transfer(matrix.OutputMas(), 0);
         }
