@@ -53,8 +53,10 @@ namespace WindowsFormsApp1
                 return "Ошибка";
             }
 
+            List<int> ind = new List<int>();
             int index = 0;
             int sum = int.MaxValue;
+            List<int> sumList = new List<int>();
 
             for (int i = 0; i <= 4; i++)
             {
@@ -63,19 +65,30 @@ namespace WindowsFormsApp1
                 {
                     temp += matrix[i, j];
                 }
+                sumList.Add(temp);
 
-                if (temp < sum)
+                /*if (temp < sum)
                 {
+                    ind.Add(i + 1);
                     index = i + 1;
                     sum = temp;
                 }
                 else if (temp == sum)
                 {
                     return $"Ошибка. Наименьшая сумма находиться в нескольких строках";
-                }
+                }*/
 
             }
-            return $"Наименьшая сумма элементов в {index}. Сумма: {sum}";
+            int a = sumList.Min();
+            for (int i = 0; i <= 4; i++)
+            {
+                if (sumList[i] == sumList.Min())
+                {
+                    ind.Add(i + 1);
+                    sum = sumList[i];
+                }
+            }
+            return $"Наименьшая сумма элементов в {String.Join(",", ind)}. Сумма: {sum}";
         }
     }
 }
