@@ -23,9 +23,9 @@ namespace WindowsFormsApp1
             };
         }
 
-        public void InputMas(int i, int j)
+        public void InputMas(int[,] mas)
         {
-            matrix = mas;
+           matrix = mas;
         }
 
         public int[,] OutputMas()
@@ -33,7 +33,7 @@ namespace WindowsFormsApp1
             return this.matrix;
         }
 
-        public void InputRandomMas()
+        public int[,] InputRandomMas()
         {
             Random rnd = new Random();
             for (int i = 0; i < 5; i++)
@@ -43,28 +43,39 @@ namespace WindowsFormsApp1
                     matrix[i, j] = rnd.Next(-10, 10);
                 }
             }
+            return matrix;
         }
 
-        public string Result()
+        public string Result(bool g)
         {
+            if (!g)
+            {
+                return "Ошибка";
+            }
+
             int index = 0;
             int sum = int.MaxValue;
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i <= 4; i++)
             {
                 int temp = 0;
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j <= 4; j++)
                 {
                     temp += matrix[i, j];
-
-                    if (temp < sum)
-                    {
-                        index = i + 1;
-                        sum = temp;
-                    }
                 }
+
+                if (temp < sum)
+                {
+                    index = i + 1;
+                    sum = temp;
+                }
+                else if (temp == sum)
+                {
+                    return $"Ошибка. Наименьшая сумма находиться в нескольких строках";
+                }
+
             }
-            return $"Наименьшая сумма элементов в {index}";
+            return $"Наименьшая сумма элементов в {index}. Сумма: {sum}";
         }
     }
 }
